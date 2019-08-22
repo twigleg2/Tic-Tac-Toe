@@ -74,6 +74,17 @@ import './index.css';
       const current = history[history.length-1];
       const winner = calculateWinner(current.squares);
 
+      const moves = history.map((squares, moveNum) => {
+          const description = moveNum ?
+            'Go to move #' + moveNum :
+            'Go to game start';
+          return (
+              <li>
+                  <button onClick={() => this.jumpTo(moveNum)}>{description}</button>
+              </li>
+          );
+      });
+
       let status;
       if(winner) {
         status = 'Winner: ' + winner;
@@ -90,7 +101,7 @@ import './index.css';
           </div>
           <div className="game-info">
             <div>{status}</div>
-            <ol>{/* TODO */}</ol>
+            <ol>{moves}</ol>
           </div>
         </div>
       );
