@@ -1,5 +1,5 @@
 # Tic-Tac-Toe
-Learn React by making a Tic-Tac-Toe game
+Learn React by making a Tic-Tac-Toe game\
 https://reactjs.org/tutorial/tutorial.html
 
 ## Why Immutability Is Important
