@@ -50,12 +50,13 @@ import './index.css';
                 squares: Array(9).fill(null),
             }],
             xIsNext: true,
-        }
+            turnNumber: 0,
+        };
     }
     
     handleClick(i) {
-        const history = this.state.history;
-        const current = history[history.length-1]
+        const history = this.state.history.slice(0, this.state.turnNumber + 1);
+        const current = history[history.length-1];
         const squares = current.squares.slice();
         if(calculateWinner(squares) || squares[i]) {
             return;
@@ -66,15 +67,23 @@ import './index.css';
                 squares: squares,
             }]),
             xIsNext: !this.state.xIsNext,
+            turnNumber: history.length,
         });
+    }
+
+    jumpTo(turnNum) {
+        this.setState({
+            turnNumber: turnNum,
+            xIsNext: (turnNum % 2) === 0
+        })
     }
 
     render() {
       const history = this.state.history;
-      const current = history[history.length-1];
+      const current = history[this.state.turnNumber];
       const winner = calculateWinner(current.squares);
 
-      const moves = history.map((squares, moveNum) => {
+      const moves = history.map((turn, moveNum) => {
           const description = moveNum ?
             'Go to move #' + moveNum :
             'Go to game start';
